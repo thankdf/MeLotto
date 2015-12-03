@@ -1,0 +1,62 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.kd.melotto">
+
+    <uses-permission android:name="android.permission.INTERNET" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.SET_DEBUG_APP" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
+    </uses-permission>
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <application android:allowBackup="true" android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher" android:theme="@style/AppTheme">
+    <activity
+        android:name=".OpeningScreen"
+        android:label="@string/app_name" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+   <activity
+        android:name="com.dropbox.client2.android.AuthActivity"
+        android:configChanges = "orientation|keyboard"
+        android:launchMode = "singleTask">
+        <intent-filter>
+            <data android:scheme = "db-ogzrv7h1fvq0ed8" />
+            <action android:name="android.intent.action.view" />
+            <category android:name="android.intent.category.browsable" />
+            <category android:name="android.intent.category.default" />
+        </intent-filter>
+    </activity>
+    <activity
+        android:name=".Registration"
+        android:label="Registration" >
+    </activity>
+    <activity
+        android:name=".ForgetUserData"
+        android:label="ForgetUserData" >
+    </activity>
+    <activity
+        android:name=".ForgetUsername"
+        android:label="ForgetUsername" >
+    </activity>
+    <activity
+        android:name=".ForgetPassword"
+        android:label="ForgetPassword" >
+    </activity>
+    <activity
+        android:name=".MainMenu"
+        android:label="MainMenu" >
+    </activity>
+    <activity
+        android:name=".ViewLotteryResults"
+        android:label="ViewLotteryResults">
+    </activity>
+    </application>
+</manifest>
