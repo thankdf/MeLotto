@@ -1,4 +1,4 @@
-package com.example.kd.melotto;
+package com.example.kd.melotto.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.kd.melotto.Account;
+import com.example.kd.melotto.R;
+import com.example.kd.melotto.UserData;
 
 /**
  * Created by kd on 12/1/15.

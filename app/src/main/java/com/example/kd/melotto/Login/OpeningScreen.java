@@ -1,5 +1,6 @@
-package com.example.kd.melotto;
+package com.example.kd.melotto.Login;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.kd.melotto.ForgetUserData;
+import com.example.kd.melotto.MainMenu;
+import com.example.kd.melotto.R;
+
 /**
  * Created by kd on 12/1/15.
  */
@@ -15,6 +20,8 @@ public class OpeningScreen extends AppCompatActivity implements View.OnClickList
 {
     private Button login, register, forget;
     private EditText email, password;
+
+    public static UserLocalStore userLocalStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +46,13 @@ public class OpeningScreen extends AppCompatActivity implements View.OnClickList
                 if (user.equals("") || pass.equals("")) {
                     Toast.makeText(getApplicationContext(), "One or more text fields are not filled. Try again.", Toast.LENGTH_LONG).show();
                     break;
-                }
-                else if (!validEmail(user)) {
+                } else if (!validEmail(user)) {
                     Toast.makeText(getApplicationContext(), "Invalid email. Try again.", Toast.LENGTH_LONG).show();
                     break;
-                }
-                else if (password.length() < 8) {
+                } else if (password.length() < 8) {
                     Toast.makeText(getApplicationContext(), "Password length has to be at least 8 characters.", Toast.LENGTH_LONG).show();
                     break;
-                }
-                else {
+                } else {
                     startActivity(new Intent(this, MainMenu.class));
                     break;
                 }
@@ -72,5 +76,34 @@ public class OpeningScreen extends AppCompatActivity implements View.OnClickList
             return true;
         }
         return false;
+    }
+
+    private void authenticate(User user) {
+        ServerRequest serverRequest = new ServerRequest(this);
+        serverRequest.fetchUserDataBackground(user, new GetUserCallback() {
+            @Override
+            public void done(User returnedUser) {
+                if (returnedUser == null) {
+                    showErrorMessage();
+                } else {
+                    logUserIn(returnedUser);
+                }
+            }
+        });
+    }
+
+    private void showErrorMessage() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(OpeningScreen.this);
+        dialogBuilder.setMessage("Incorrect User Details");
+        dialogBuilder.setPositiveButton("OK", null);
+        dialogBuilder.show();
+    }
+
+    private void logUserIn(User returnedUser) {
+        userLocalStore.storeUserData(returnedUser);
+        userLocalStore.setUserLoggedIn(true);
+
+        startActivity(new Intent(this, MainMenu.class));
+
     }
 }

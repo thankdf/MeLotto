@@ -15,7 +15,7 @@
     <application android:allowBackup="true" android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher" android:theme="@style/AppTheme">
     <activity
-        android:name=".OpeningScreen"
+        android:name=".Login.OpeningScreen"
         android:label="@string/app_name" >
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -35,7 +35,7 @@
         </intent-filter>
     </activity>
     <activity
-        android:name=".Registration"
+        android:name=".Login.Registration"
         android:label="Registration" >
     </activity>
     <activity
@@ -43,11 +43,11 @@
         android:label="ForgetUserData" >
     </activity>
     <activity
-        android:name=".ForgetUsername"
+        android:name=".Login.ForgetUsername"
         android:label="ForgetUsername" >
     </activity>
     <activity
-        android:name=".ForgetPassword"
+        android:name=".Login.ForgetPassword"
         android:label="ForgetPassword" >
     </activity>
     <activity
