@@ -58,11 +58,15 @@ public class ForgetPassword extends AppCompatActivity implements View.OnClickLis
                 }
                 else {
                     //retrieve password based on info
+                    String password = "";
+                    Toast.makeText(getApplicationContext(), "The password to your account is " + password + ".", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(this, OpeningScreen.class));
+                    break;
+
                 }
-                break;
             }
             case (R.id.backButton): {
-                startActivity(new Intent(this, OpeningScreen.class));
+                startActivity(new Intent(this, ForgetUserData.class));
                 break;
             }
         }

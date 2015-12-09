@@ -54,12 +54,14 @@ public class ForgetUsername extends AppCompatActivity implements View.OnClickLis
                     break;
                 }
                 else {
-                    //retrieve username based on info
+                    String username = "";
+                    Toast.makeText(getApplicationContext(), "The password to your account is " + password + ".", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(this, OpeningScreen.class));
+                    break;
                 }
-                break;
             }
             case (R.id.backButton): {
-                startActivity(new Intent(this, OpeningScreen.class));
+                startActivity(new Intent(this, ForgetUserData.class));
                 break;
             }
         }

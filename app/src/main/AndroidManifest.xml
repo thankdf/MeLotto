@@ -46,9 +46,5 @@
         android:name=".ViewLotteryResults"
         android:label="ViewLotteryResults">
     </activity>
-        <activity
-            android:name=".UploadTicket"
-            android:label="UploadTicket">
-        </activity>
     </application>
 </manifest>

@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 /**
  * Created by kd on 12/1/15.
@@ -43,7 +47,8 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener
                 break;
             }
             case (R.id.uploadTicketButton): {
-                startActivity(new Intent(this, UploadTicket.class));
+                IntentIntegrator newIntent = new IntentIntegrator(this);
+                newIntent.initiateScan();
                 break;
             }
             case (R.id.viewTicketsButton): {
@@ -58,6 +63,21 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener
                 startActivity(new Intent(this, OpeningScreen.class));
                 break;
             }
+        }
+    }
+
+    public void onActivityResult(int request, int result, Intent intent)
+    {
+        IntentResult resultIntent = IntentIntegrator.parseActivityResult(request, result, intent);
+        if(resultIntent != null)
+        {
+            String data = resultIntent.getContents();
+            String format = resultIntent.getFormatName();
+            Toast.makeText(getApplicationContext(), "FORMAT: " + format + ". CONTENT: " + data + ".", Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "No scanning data received.", Toast.LENGTH_LONG).show();
         }
     }
 }

@@ -72,14 +72,14 @@
         android:layout_marginBottom="25dp">
 
         <Button
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Register"
             android:id="@+id/registerButton"
             android:layout_weight="1" />
 
         <Button
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Forget User info?"
             android:id="@+id/forget"
