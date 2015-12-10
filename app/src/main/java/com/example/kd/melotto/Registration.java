@@ -4,13 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 /**
  * Created by kd on 11/30/15.
@@ -85,8 +88,10 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    //registerUser(newUser);
-                    startActivity(new Intent(this, OpeningScreen.class));
+                    User registeredData = new User(user, pass, phone, recovery);
+                    OpeningScreen.userLocalStore.storeUserData(registeredData);
+                    registerUser(registeredData);
+//                    startActivity(new Intent(this, OpeningScreen.class));
                     break;
                 }
             }
@@ -97,15 +102,33 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-//    private void registerUser (UserData newUser) {
-//        ServerRequest request = new ServerRequest(this);
-//        request.StoreUserDataInBackground(newUser, new GetUserCallback() {
-//            @Override
-//            public void done(UserData userReturns) {
-//                Toast.makeText(getApplicationContext(),"Registration Complete!", Toast.LENGTH_LONG).show();
-//            }
-//        });
-//    }
+    private void registerUser(User user) {
+        ServerRequest serverRequest = new ServerRequest(this);
+        serverRequest.storeUserDataBackground(user, new GetUserCallback() {
+            @Override
+            public void done(User returnedUser) {
+                Toast.makeText(getApplicationContext(),"Registration Complete!", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(Registration.this, OpeningScreen.class));
+            }
+        });
+    }
+
+    private void saveObject(UserLocalStore userLocalStore) {
+        try {
+            String filename = Environment.getExternalStorageDirectory()
+                    .getPath() + "/UserLocalStore.bin";
+            ObjectOutputStream oos = new ObjectOutputStream
+                    (new FileOutputStream(new File(filename)));
+            //Select where you wish to save the file...
+            oos.writeObject(userLocalStore);// write the class as an 'object'
+            oos.flush(); // flush the stream to insure all of the
+            // information was written to 'save_object.bin'
+            oos.close();// close the stream
+        } catch (Exception ex) {
+            Log.v("Seriazation Save Error:", ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
 
     @Override
     public boolean validEmail(String email)
@@ -119,4 +142,3 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     }
 
 }
-
