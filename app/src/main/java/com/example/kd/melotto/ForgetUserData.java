@@ -12,7 +12,7 @@ import android.widget.Button;
 public class ForgetUserData extends AppCompatActivity implements View.OnClickListener{
 
     private Button username, password, back;
-    private UserData user;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

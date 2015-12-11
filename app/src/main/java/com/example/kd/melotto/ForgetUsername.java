@@ -15,7 +15,7 @@ public class ForgetUsername extends AppCompatActivity implements View.OnClickLis
 {
     private Button submit, back;
     private EditText password, phoneNumber, recoveryUsername;
-    private UserData user;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +35,9 @@ public class ForgetUsername extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()) {
             case (R.id.registerButton): {
                 String pass = password.getText().toString();
-                int phone = 0;
+                String phone = phoneNumber.getText().toString();
                 String recovery = recoveryUsername.getText().toString();
-                if (pass.equals("") || (phoneNumber.getText().toString()).equals("") || recovery.equals("")) {
+                if (pass.equals("") || phone.equals("") || recovery.equals("")) {
                     Toast.makeText(getApplicationContext(), "One or more text fields are not filled. Try again.", Toast.LENGTH_LONG).show();
                     break;
                 }
@@ -45,7 +45,7 @@ public class ForgetUsername extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(getApplicationContext(), "Password has to be at least 8 characters. Try again.", Toast.LENGTH_LONG).show();
                     break;
                 }
-                if (phoneNumber.length() != 10 && phoneNumber.length() > 0) {
+                if (phone.length() != 10 && phone.length() > 0) {
                     Toast.makeText(getApplicationContext(), "Phone number has to be exactly 10 digits.", Toast.LENGTH_LONG).show();
                     break;
                 }

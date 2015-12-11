@@ -14,7 +14,7 @@ import android.widget.Toast;
 public class ForgetPassword extends AppCompatActivity implements View.OnClickListener, Account {
     private Button submit, back;
     private EditText username, phoneNumber, recoveryUsername;
-    private UserData user;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +34,9 @@ public class ForgetPassword extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()) {
             case (R.id.registerButton): {
                 String user = username.getText().toString();
-                int phone = 0;
+                String phone = phoneNumber.getText().toString();
                 String recovery = recoveryUsername.getText().toString();
-                if (user.equals("") || (phoneNumber.getText().toString()).equals("") || recovery.equals("")) {
+                if (user.equals("") || phone.equals("") || recovery.equals("")) {
                     Toast.makeText(getApplicationContext(), "One or more text fields are not filled. Try again.", Toast.LENGTH_LONG).show();
                     break;
                 }
@@ -44,7 +44,7 @@ public class ForgetPassword extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(getApplicationContext(), "Invalid email. Try again.", Toast.LENGTH_LONG).show();
                     break;
                 }
-                if (phoneNumber.length() != 10 && phoneNumber.length() > 0) {
+                if (phone.length() != 10 && phone.length() > 0) {
                     Toast.makeText(getApplicationContext(), "Phone number has to be exactly 10 digits.", Toast.LENGTH_LONG).show();
                     break;
                 }

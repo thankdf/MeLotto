@@ -31,6 +31,7 @@ public class OpeningScreen extends AppCompatActivity implements View.OnClickList
         login.setOnClickListener(this);
         register.setOnClickListener(this);
         forget.setOnClickListener(this);
+        userLocalStore = new UserLocalStore(getApplicationContext());
     }
 
     @Override
@@ -50,6 +51,7 @@ public class OpeningScreen extends AppCompatActivity implements View.OnClickList
                     break;
                 } else {
                     startActivity(new Intent(this, MainMenu.class));
+                    //authenticate(new User(user, pass, "", ""));
                     break;
                 }
             }

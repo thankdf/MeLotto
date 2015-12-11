@@ -29,7 +29,7 @@ public class UserLocalStore implements Serializable {
         SharedPreferences.Editor spEditor = userLocalDatabase.edit();
         spEditor.putString("username", user.username);
         spEditor.putString("password", user.password);
-        spEditor.putInt("phoneNum", user.phoneNum);
+        spEditor.putString("phoneNum", user.phoneNum);
         spEditor.putString("email", user.email);
         spEditor.commit();
     }
@@ -37,7 +37,7 @@ public class UserLocalStore implements Serializable {
     public User getUser() {
         String username = userLocalDatabase.getString("username", 0 + "");
         String password = userLocalDatabase.getString("password", 0 + "");
-        int phoneNum = userLocalDatabase.getInt("phoneNum", 0);
+        String phoneNum = userLocalDatabase.getString("phoneNum", 0 + "");
         String email = userLocalDatabase.getString("email", 0 + "");
 
         User storedUser = new User(username, password, phoneNum, email);

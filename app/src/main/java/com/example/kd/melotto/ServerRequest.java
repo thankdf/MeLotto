@@ -3,8 +3,8 @@ package com.example.kd.melotto;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.net.http.HttpResponseCache;
 import android.os.AsyncTask;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -18,6 +18,7 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 
@@ -126,7 +127,7 @@ public class ServerRequest {
             User returnedUser = null;
             try {
                 post.setEntity(new UrlEncodedFormEntity(dataToSend));
-                HttpResponseCache httpResponse = client.execute(post);
+                HttpResponse httpResponse = client.execute(post);
 
                 HttpEntity entity = httpResponse.getEntity();
                 String result = EntityUtils.toString(entity);
@@ -136,7 +137,7 @@ public class ServerRequest {
                     returnedUser = null;
                 } else {
                     String username = jObject.getString("Username");
-                    int phoneNum = jObject.getInt("Phone Number");
+                    String phoneNum = jObject.getString("Phone Number");
                     String email = jObject.getString("Recovery Username (E-mail)");
 
                     returnedUser = new User(username, user.password, phoneNum, email);

@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:id="@+id/Orientation"
     android:padding="15dp"
-    android:background="@color/material_deep_teal_200">
+    android:background="#4e59565d">
 
     <TextView
         android:layout_width="wrap_content"

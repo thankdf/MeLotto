@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 /**
@@ -22,7 +21,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 {
     private Button register, back;
     private EditText username, password, confirmPassword, phoneNumber, recoveryUsername;
-    private UserData user;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +45,9 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
                 String confirmPass = confirmPassword.getText().toString();
-                int phone = 0;
+                String phone = phoneNumber.getText().toString();
                 String recovery = recoveryUsername.getText().toString();
-                if (user.equals("") || pass.equals("") || confirmPass.equals("") || (phoneNumber.getText().toString()).equals("")) {
+                if (user.equals("") || pass.equals("") || confirmPass.equals("") || phone.equals("")) {
                     Toast.makeText(getApplicationContext(), "One or more text fields are not filled. Try again.", Toast.LENGTH_LONG).show();
                     break;
                 }
@@ -64,7 +63,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(getApplicationContext(), "Passwords do not match. Try inputting again.", Toast.LENGTH_LONG).show();
                     break;
                 }
-                else if (phoneNumber.length() != 10 && phoneNumber.length() > 0) {
+                else if (phone.length() != 10 && phone.length() > 0) {
                     Toast.makeText(getApplicationContext(), "Phone number has to be exactly 10 digits.", Toast.LENGTH_LONG).show();
                     break;
                 }
@@ -77,21 +76,9 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                     break;
                 }
                 else {
-                    UserData newUser = new UserData(user, pass, phone, recovery);
-                    File storageDir = Environment.getExternalStorageDirectory();
-                    File full_directory = new File(storageDir, ".lotto");
-                    if (!full_directory.exists()) {
-                        full_directory.mkdir();
-                    }
-                    try {
-                        File objectWrite = File.createTempFile(user, ".tmp", full_directory);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                     User registeredData = new User(user, pass, phone, recovery);
                     OpeningScreen.userLocalStore.storeUserData(registeredData);
                     registerUser(registeredData);
-//                    startActivity(new Intent(this, OpeningScreen.class));
                     break;
                 }
             }
